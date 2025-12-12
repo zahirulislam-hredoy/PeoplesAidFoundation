@@ -1,0 +1,168 @@
+/* --- BRAND VARIABLES --- */
+:root {
+    --navy: #104D73;
+    --teal: #16808C;
+    --white: #ffffff;
+    --light: #F4F7F6;
+    --dark: #333;
+}
+
+/* --- RESET & GLOBAL --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Montserrat', sans-serif; 
+    line-height: 1.6;
+    color: var(--dark);
+    background: var(--white);
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--navy); }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+img { width: 100%; display: block; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.section-padding { padding: 80px 0; }
+.bg-light { background: var(--light); }
+
+/* --- NAVBAR --- */
+nav {
+    position: fixed; top: 0; width: 100%; height: 70px;
+    background: var(--navy); color: var(--white);
+    z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.nav-container { display: flex; justify-content: space-between; align-items: center; height: 100%; }
+
+/* Default Desktop Logo */
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 800; max-width: 100%; }
+.nav-logo { height: 50px; width: auto; }
+.logo-text-nav { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+
+.nav-links { display: flex; gap: 20px; align-items: center; }
+.nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+.nav-links a:hover { color: var(--teal); }
+.btn-nav { background: var(--teal); padding: 10px 25px; border-radius: 50px; }
+.btn-nav:hover { background: var(--white); color: var(--navy) !important; }
+
+/* Hamburger (Hidden on Desktop) */
+.hamburger { display: none; font-size: 1.8rem; cursor: pointer; color: var(--white); }
+
+/* --- HERO --- */
+header {
+    height: 100vh; position: relative; display: flex; align-items: center;
+    justify-content: center; text-align: center; color: var(--white);
+    overflow: hidden;
+}
+.hero-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; z-index: 1;
+}
+.overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(16, 77, 115, 0.6); z-index: 2;
+}
+.hero-content { position: relative; z-index: 3; max-width: 800px; padding: 20px; }
+.badge { background: var(--teal); padding: 5px 12px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; letter-spacing: 2px; }
+header h1 { font-size: 3.5rem; margin: 20px 0; color: var(--white); line-height: 1.2; font-weight: 800; }
+.highlight { color: #4DD0E1; }
+.hero-btns { margin-top: 30px; }
+.btn { display: inline-block; padding: 15px 35px; border-radius: 50px; font-weight: bold; text-transform: uppercase; margin: 10px; cursor: pointer; }
+.btn-primary { background: var(--teal); color: var(--white); }
+.btn-primary:hover { background: #126873; transform: translateY(-3px); }
+.btn-outline { border: 2px solid var(--white); color: var(--white); }
+.btn-outline:hover { background: var(--white); color: var(--navy); }
+
+/* --- SECTIONS --- */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.section-title { font-size: 2.5rem; margin-bottom: 20px; position: relative; display: inline-block; }
+.section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--teal); margin-top: 10px; }
+.check-list li { margin: 10px 0; font-weight: 600; }
+.check-list i { color: var(--teal); margin-right: 10px; }
+.about-img img { border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.center-text { text-align: center; max-width: 700px; margin: 0 auto 50px; }
+.card { background: var(--white); padding: 40px 30px; border-radius: 10px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+.card:hover { transform: translateY(-10px); }
+.icon-box { font-size: 2.5rem; color: var(--teal); margin-bottom: 20px; }
+
+/* --- LEADERSHIP --- */
+.founder-box { background: var(--navy); color: var(--white); display: flex; border-radius: 15px; overflow: hidden; }
+.founder-img { flex: 1; min-height: 300px; }
+.founder-img img { height: 100%; width: 100%; object-fit: cover; }
+.founder-content { flex: 2; padding: 50px; display: flex; flex-direction: column; justify-content: center; }
+blockquote { font-size: 1.2rem; font-style: italic; margin-bottom: 20px; font-weight: 500; }
+
+/* --- CONTACT --- */
+.contact-wrapper { max-width: 600px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; font-weight: 700; margin-bottom: 5px; color: var(--navy); }
+.form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: inherit; }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--teal); }
+
+/* --- CTA & FOOTER --- */
+.cta-section { background: var(--teal); color: var(--white); text-align: center; padding: 80px 20px; }
+.btn-white { background: var(--white); color: var(--navy); }
+.btn-white:hover { background: var(--navy); color: var(--white); }
+
+footer {
+    position: relative;
+    background-image: url('images/footer-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #ccc;
+    padding-top: 60px;
+}
+.footer-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(8, 36, 54, 0.95); z-index: 1;
+}
+.footer-content, .footer-bottom { position: relative; z-index: 2; }
+.footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; padding-bottom: 40px; }
+.footer-col h3, .footer-col h4 { color: var(--white); margin-bottom: 20px; }
+.social-links a { display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); text-align: center; line-height: 40px; border-radius: 50%; margin-right: 10px; }
+.social-links a:hover { background: var(--teal); color: var(--white); }
+.footer-bottom { background: rgba(5, 27, 41, 0.8); text-align: center; padding: 20px; font-size: 0.8rem; }
+
+
+/* =========================================
+   MOBILE RESPONSIVE FIX (THE AGGRESSIVE FIX)
+   ========================================= */
+@media (max-width: 768px) {
+    /* 1. Show Hamburger */
+    .hamburger { display: block; flex-shrink: 0; } /* Keep hamburger size fixed */
+    
+    /* 2. Hide Desktop Menu */
+    .nav-links { display: none; }
+    
+    /* 3. LOGO FIX FOR MOBILE */
+    /* Give the logo area only 75% of the width so it doesn't hit the hamburger */
+    .logo { 
+        max-width: 75%; 
+        gap: 8px;
+    }
+    
+    /* Make the logo icon smaller */
+    .nav-logo { height: 35px; }
+    
+    /* Make the text SMALLER and allow wrapping */
+    .logo-text-nav { 
+        font-size: 10px; /* Small enough to fit */
+        line-height: 1.2;
+        white-space: normal; /* Allow it to go to 2 lines */
+        text-align: left;
+    }
+    
+    /* 4. Layout Stacking */
+    .grid-2, .founder-box { grid-template-columns: 1fr; flex-direction: column; }
+    
+    /* 5. Font Adjustments */
+    header h1 { font-size: 2rem; }
+    .founder-img { height: 250px; }
+    
+    /* 6. Spacing */
+    .section-padding { padding: 50px 0; }
+    .container { padding: 0 15px; }
+}
