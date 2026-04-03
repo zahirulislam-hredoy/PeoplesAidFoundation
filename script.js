@@ -19,7 +19,6 @@
   function addClass(el, cls) { if (el && !el.classList.contains(cls)) el.classList.add(cls); }
   function removeClass(el, cls) { if (el && el.classList.contains(cls)) el.classList.remove(cls); }
 
-  // 1. Mobile Menu
   const MobileMenu = (function () {
     let isOpen = false;
     function toggle() {
@@ -44,7 +43,6 @@
     return { init };
   })();
 
-  // 2. Smooth Scroll
   const SmoothScroll = (function () {
     function init() {
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -64,7 +62,6 @@
     return { init };
   })();
 
-  // 3. Header Scroll
   const HeaderScroll = (function () {
     function init() {
       if (!DOM.header) return;
@@ -76,7 +73,6 @@
     return { init };
   })();
 
-  // 4. Form Success Message (Restored)
   const FormFeedback = (function () {
     function init() {
       if (DOM.contactForm) {
@@ -89,9 +85,8 @@
 
           setTimeout(() => {
             btn.textContent = 'Message Sent Successfully!';
-            btn.style.backgroundColor = '#27ae60'; // Success green
+            btn.style.backgroundColor = '#27ae60';
             this.reset();
-            
             setTimeout(() => {
               btn.disabled = false;
               btn.textContent = originalText;
@@ -104,7 +99,6 @@
     return { init };
   })();
 
-  // 5. Scroll Reveal
   const ScrollReveal = (function () {
     function init() {
       const revealTargets = document.querySelectorAll('[data-reveal]');
@@ -127,7 +121,6 @@
     return { init };
   })();
 
-  // 6. Gallery Filter
   const GalleryFilter = (function () {
     function init() {
       const filterBtns = document.querySelectorAll('.filter-btn');
@@ -156,7 +149,94 @@
     return { init };
   })();
 
-  // 7. Back-to-Top Button
+  const Lightbox = (function () {
+    let currentImages = [];
+    let currentIndex = 0;
+
+    function init() {
+      const modal = document.getElementById('lightbox');
+      if (!modal) return;
+
+      const imgEl = document.getElementById('lightboxImage');
+      const counterEl = document.getElementById('lightboxCounter');
+      const prevBtn = document.getElementById('lightboxPrev');
+      const nextBtn = document.getElementById('lightboxNext');
+      const closeBtn = document.getElementById('lightboxClose');
+      const triggers = document.querySelectorAll('.js-lightbox-trigger');
+
+      triggers.forEach(trigger => {
+        const imgs = trigger.querySelectorAll('img');
+        if (imgs.length > 1) {
+          const indicator = document.createElement('div');
+          indicator.className = 'gallery-indicator';
+          indicator.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> ${imgs.length} Photos`;
+          trigger.appendChild(indicator);
+        }
+
+        trigger.addEventListener('click', () => {
+          currentImages = Array.from(imgs).map(img => img.src);
+          currentIndex = 0;
+          updateView();
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function updateView() {
+        imgEl.src = currentImages[currentIndex];
+        counterEl.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+
+        if (currentImages.length <= 1) {
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
+          counterEl.style.display = 'none';
+        } else {
+          prevBtn.style.display = 'flex';
+          nextBtn.style.display = 'flex';
+          counterEl.style.display = 'block';
+        }
+      }
+
+      closeBtn.addEventListener('click', closeModal);
+      
+      prevBtn.addEventListener('click', () => {
+        if (currentImages.length <= 1) return;
+        currentIndex = (currentIndex === 0) ? currentImages.length - 1 : currentIndex - 1;
+        updateView();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentImages.length <= 1) return;
+        currentIndex = (currentIndex === currentImages.length - 1) ? 0 : currentIndex + 1;
+        updateView();
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft' && currentImages.length > 1) {
+          currentIndex = (currentIndex === 0) ? currentImages.length - 1 : currentIndex - 1;
+          updateView();
+        }
+        if (e.key === 'ArrowRight' && currentImages.length > 1) {
+          currentIndex = (currentIndex === currentImages.length - 1) ? 0 : currentIndex + 1;
+          updateView();
+        }
+      });
+    }
+
+    return { init };
+  })();
+
   const BackToTop = (function () {
     function init() {
       if (!DOM.backToTop) return;
@@ -169,13 +249,11 @@
     return { init };
   })();
 
-  // 8. Footer Year
   const FooterYear = (function () {
     function init() { if (DOM.yearSpan) DOM.yearSpan.textContent = new Date().getFullYear(); }
     return { init };
   })();
 
-  // Initialize all
   function init() {
     MobileMenu.init();
     SmoothScroll.init();
@@ -183,6 +261,7 @@
     FormFeedback.init();
     ScrollReveal.init();
     GalleryFilter.init();
+    Lightbox.init(); 
     BackToTop.init();
     FooterYear.init();
   }
